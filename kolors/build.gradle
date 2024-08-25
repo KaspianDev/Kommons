@@ -1,0 +1,6 @@
+plugins {
+    id "java"
+}
+
+group = property("group") + ".kolors"
+version = property("version")
