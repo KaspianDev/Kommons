@@ -1,6 +1,23 @@
 plugins {
     id "java"
+    id "net.minecraftforge.licenser" version "1.0.1"
 }
 
 group = property("group") + ".kolors"
 version = property("version")
+
+tasks {
+    assemble {
+        dependsOn("updateLicenses")
+    }
+}
+
+license {
+    header = project.file("$rootDir/HEADER")
+    properties {
+        name = "Kaspian"
+        year = 2024
+    }
+
+    include "**/*.java"
+}
