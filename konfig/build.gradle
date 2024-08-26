@@ -1,5 +1,6 @@
 plugins {
     id "java"
+    id "com.gradleup.shadow" version "8.3.0"
     id "net.minecraftforge.licenser" version "1.0.1"
 }
 
@@ -14,15 +15,28 @@ dependencies {
     testImplementation platform("org.junit:junit-bom:5.11.0")
     testImplementation "org.junit.jupiter:junit-jupiter"
     testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+
+    implementation "org.yaml:snakeyaml:2.2"
 }
 
 test {
     useJUnitPlatform()
 }
 
+jar.enabled = false
+
+shadowJar {
+    setArchiveClassifier(null)
+
+    relocate "org.yaml.snakeyaml", this.group + ".snakeyaml"
+}
+
 tasks {
     assemble {
         dependsOn("updateLicenses")
+    }
+    build {
+        dependsOn("shadowJar")
     }
 }
 
