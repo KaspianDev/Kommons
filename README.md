@@ -17,3 +17,7 @@ maven { url 'https://jitpack.io' }
 ```
 implementation 'com.github.KaspianDev:Kommons:master-SNAPSHOT'
 ```
+
+## Usage
+
+For usage check test classes, library evolves too fast now and a lot can change.
