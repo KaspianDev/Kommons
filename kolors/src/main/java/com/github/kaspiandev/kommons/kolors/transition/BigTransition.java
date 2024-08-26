@@ -15,14 +15,14 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.kaspiandev.kommons.kolors.util;
+package com.github.kaspiandev.kommons.kolors.transition;
 
-public class KolorUtil {
+import com.github.kaspiandev.kommons.kolors.Kolor;
 
-    private KolorUtil() {}
+import java.util.List;
 
-    public static int clampTint(int tint) {
-        return Math.max(0, Math.min(tint, 255));
-    }
+public interface BigTransition extends Transition {
+
+    List<Kolor> transition(List<Kolor> kolors, int size);
 
 }

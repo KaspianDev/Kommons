@@ -18,6 +18,7 @@
 package com.github.kaspiandev.kommons.kolors.interpolator;
 
 import com.github.kaspiandev.kommons.kolors.Kolor;
+import com.github.kaspiandev.kommons.kolors.util.KolorUtil;
 
 public class OKLabKolorInterpolator implements KolorInterpolator {
 
@@ -78,7 +79,7 @@ public class OKLabKolorInterpolator implements KolorInterpolator {
         int green = (int) (linearToSrgb(g) * 255.0);
         int blue = (int) (linearToSrgb(blueChannel) * 255.0);
 
-        return new Kolor(clamp(red), clamp(green), clamp(blue));
+        return new Kolor(KolorUtil.clampTint(red), KolorUtil.clampTint(green), KolorUtil.clampTint(blue));
     }
 
     private double srgbToLinear(double srgb) {
@@ -93,10 +94,6 @@ public class OKLabKolorInterpolator implements KolorInterpolator {
                 : 1.055 * Math.pow(linear, 1.0 / 2.4) - 0.055;
     }
 
-    private int clamp(int value) {
-        return Math.max(0, Math.min(value, 255));
-    }
-
     private double interpolateTint(double sourceTint, double targetTint) {
         return (sourceTint == targetTint)
                 ? sourceTint
@@ -106,7 +103,7 @@ public class OKLabKolorInterpolator implements KolorInterpolator {
     private double interpolateTint(double sourceTint, double targetTint, double ratio) {
         return (sourceTint == targetTint)
                 ? sourceTint
-                : (int) (sourceTint + ratio * (targetTint - sourceTint));
+                : sourceTint + ratio * (targetTint - sourceTint);
     }
 
 }
