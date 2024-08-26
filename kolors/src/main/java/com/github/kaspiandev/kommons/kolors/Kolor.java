@@ -17,6 +17,8 @@
 
 package com.github.kaspiandev.kommons.kolors;
 
+import com.github.kaspiandev.kommons.kolors.util.KolorUtil;
+
 import java.util.Objects;
 
 public class Kolor {
@@ -26,9 +28,9 @@ public class Kolor {
     private int blue;
 
     public Kolor(int red, int green, int blue) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+        this.red = KolorUtil.clampTint(red);
+        this.green = KolorUtil.clampTint(green);
+        this.blue = KolorUtil.clampTint(blue);
     }
 
     public Kolor() {
@@ -40,7 +42,7 @@ public class Kolor {
     }
 
     public void setRed(int red) {
-        this.red = red;
+        this.red = KolorUtil.clampTint(red);
     }
 
     public int getGreen() {
@@ -48,7 +50,7 @@ public class Kolor {
     }
 
     public void setGreen(int green) {
-        this.green = green;
+        this.green = KolorUtil.clampTint(green);
     }
 
     public int getBlue() {
@@ -56,7 +58,7 @@ public class Kolor {
     }
 
     public void setBlue(int blue) {
-        this.blue = blue;
+        this.blue = KolorUtil.clampTint(blue);
     }
 
     @Override
@@ -69,6 +71,15 @@ public class Kolor {
     @Override
     public int hashCode() {
         return Objects.hash(red, green, blue);
+    }
+
+    @Override
+    public String toString() {
+        return "Kolor{" +
+                "red=" + red +
+                ", green=" + green +
+                ", blue=" + blue +
+                '}';
     }
 
 }
