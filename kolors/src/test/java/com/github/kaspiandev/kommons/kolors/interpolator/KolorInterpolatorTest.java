@@ -64,9 +64,9 @@ public class KolorInterpolatorTest {
     void testOKLabRatio() {
         OKLabKolorInterpolator interpolator = new OKLabKolorInterpolator();
 
-        Kolor gray = new Kolor(99, 99, 99);
-        Kolor interpolatedKolor = interpolator.interpolate(black, white);
-        Assertions.assertEquals(gray, interpolatedKolor);
+        Kolor darkGray = new Kolor(3, 3, 3);
+        Kolor interpolatedKolor = interpolator.interpolate(black, white, 0.1);
+        Assertions.assertEquals(darkGray, interpolatedKolor);
     }
 
 

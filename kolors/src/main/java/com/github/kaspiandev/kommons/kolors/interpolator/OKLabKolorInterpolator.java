@@ -67,9 +67,14 @@ public class OKLabKolorInterpolator implements KolorInterpolator {
     }
 
     private Kolor oklabToRgb(double l, double a, double b) {
-        double ll = Math.pow(l + 0.3963377774 * a + 0.2158037573 * b, 3);
-        double mm = Math.pow(l - 0.1055613458 * a - 0.0638541728 * b, 3);
-        double ss = Math.pow(l - 0.0894841775 * a - 1.2914855480 * b, 3);
+        double ll = l + 0.3963377774 * a + 0.2158037573 * b;
+        double mm = l - 0.1055613458 * a - 0.0638541728 * b;
+        double ss = l - 0.0894841775 * a - 1.2914855480 * b;
+
+        // Power of 3
+        ll = ll * ll * ll;
+        mm = mm * mm * mm;
+        ss = ss * ss * ss;
 
         double r = 4.0767416621 * ll - 3.3077115913 * mm + 0.2309699292 * ss;
         double g = -1.2684380046 * ll + 2.6097574011 * mm - 0.3413193965 * ss;
