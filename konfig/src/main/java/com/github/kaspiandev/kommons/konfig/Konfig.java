@@ -36,13 +36,13 @@ public class Konfig {
     private final File file;
     private final Map<String, Object> configProperties;
 
-    public Konfig(File file, String separator) {
+    public Konfig(File file) {
         this.file = file;
         DumperOptions defaultDumperOptions = new DumperOptions();
         defaultDumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         this.yaml = new Yaml(defaultDumperOptions);
         this.configProperties = loadFile();
-        this.separatorPattern = Pattern.compile(Pattern.quote(separator));
+        this.separatorPattern = Pattern.compile(Pattern.quote("."));
     }
 
     public void reload() {
