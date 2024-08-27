@@ -15,14 +15,26 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.kaspiandev.kommons.placeholders;
+package com.github.kaspiandev.kommons.placeholders.parameter;
 
-import com.github.kaspiandev.kommons.placeholders.parameter.Parameter;
+import com.github.kaspiandev.kommons.placeholders.Placeholder;
 
 import java.util.List;
 
-public interface ParameterizedPlaceholder<I, O> extends Placeholder<I, O> {
+public class SplitParameterSeparator implements ParameterSeparator {
 
-    List<Parameter<?>> getParameters();
+    private final Placeholder<?, ?> placeholder;
+    private final String separator;
+
+    public SplitParameterSeparator(Placeholder<?, ?> placeholder, String separator) {
+        this.placeholder = placeholder;
+        this.separator = separator;
+    }
+
+    @Override
+    public List<Parameter<?>> separate() {
+        //return Arrays.stream(placeholder.getIdentifier().split(separator));
+        return null;
+    }
 
 }
