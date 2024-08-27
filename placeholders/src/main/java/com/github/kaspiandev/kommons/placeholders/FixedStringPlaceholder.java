@@ -33,7 +33,12 @@ public class FixedStringPlaceholder implements StringPlaceholder<String> {
     }
 
     @Override
-    public String evaluate(String input) {
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String evaluate() {
         return value;
     }
 

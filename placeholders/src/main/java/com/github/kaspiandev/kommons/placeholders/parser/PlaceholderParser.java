@@ -22,14 +22,12 @@ import com.github.kaspiandev.kommons.placeholders.formatter.PlaceholderFormatter
 
 import java.util.Collection;
 
-public interface PlaceholderParser {
+public interface PlaceholderParser<O> {
 
-    String getInput();
-
-    Collection<Placeholder<?, ?>> getPlaceholders();
+    Collection<Placeholder<?, O>> getPlaceholders();
 
     PlaceholderFormatter getFormatter();
 
-    String parse();
+    String parse(String input);
 
 }

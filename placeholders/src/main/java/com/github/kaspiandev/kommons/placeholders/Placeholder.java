@@ -21,6 +21,8 @@ public interface Placeholder<I, O> {
 
     String getIdentifier();
 
-    O evaluate(I input);
+    I getValue();
+
+    O evaluate();
 
 }

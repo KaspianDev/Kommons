@@ -22,9 +22,11 @@ import java.util.function.Supplier;
 public class LazyStringPlaceholder implements LazyPlaceholder<String>, StringPlaceholder<Supplier<String>> {
 
     private final String identifier;
+    private final Supplier<String> value;
 
-    public LazyStringPlaceholder(String identifier) {
+    public LazyStringPlaceholder(String identifier, Supplier<String> value) {
         this.identifier = identifier;
+        this.value = value;
     }
 
     @Override
@@ -33,8 +35,13 @@ public class LazyStringPlaceholder implements LazyPlaceholder<String>, StringPla
     }
 
     @Override
-    public String evaluate(Supplier<String> input) {
-        return input.get();
+    public Supplier<String> getValue() {
+        return value;
+    }
+
+    @Override
+    public String evaluate() {
+        return value.get();
     }
 
 }
