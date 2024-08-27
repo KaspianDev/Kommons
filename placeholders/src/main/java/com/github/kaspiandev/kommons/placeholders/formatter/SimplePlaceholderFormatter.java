@@ -23,10 +23,12 @@ public class SimplePlaceholderFormatter implements PlaceholderFormatter {
 
     private final String prefix;
     private final String suffix;
+    private final Pattern pattern;
 
     public SimplePlaceholderFormatter(String prefix, String suffix) {
         this.prefix = prefix;
         this.suffix = suffix;
+        this.pattern = compile();
     }
 
     public String getPrefix() {
@@ -37,9 +39,13 @@ public class SimplePlaceholderFormatter implements PlaceholderFormatter {
         return suffix;
     }
 
-    @Override
-    public Pattern compile() {
+    private Pattern compile() {
         return Pattern.compile(Pattern.quote(getPrefix()) + "([^{}]+)" + Pattern.quote(getSuffix()));
+    }
+
+    @Override
+    public Pattern getCompiledPattern() {
+        return pattern;
     }
 
     @Override

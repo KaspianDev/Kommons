@@ -26,7 +26,7 @@ public class PlaceholderFormatterMatcher {
 
     public PlaceholderFormatterMatcher(PlaceholderFormatter formatter, String input) {
         this.formatter = formatter;
-        this.matcher = formatter.compile().matcher(input);
+        this.matcher = formatter.getCompiledPattern().matcher(input);
     }
 
     public boolean find() {

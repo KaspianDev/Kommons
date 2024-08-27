@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public interface PlaceholderFormatter {
 
-    Pattern compile();
+    Pattern getCompiledPattern();
 
     int getGroup();
 
