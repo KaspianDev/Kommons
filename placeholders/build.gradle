@@ -1,0 +1,47 @@
+plugins {
+    id "java"
+    id "net.minecraftforge.licenser" version "1.0.1"
+    id "me.champeau.jmh" version "0.7.2"
+}
+
+group = property("group") + ".placeholders"
+version = property("version")
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform("org.junit:junit-bom:5.11.0")
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+
+    jmh "org.openjdk.jmh:jmh-core:1.37"
+    jmh "org.openjdk.jmh:jmh-generator-annprocess:1.37"
+    jmhAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:1.37"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks {
+    assemble {
+        dependsOn("updateLicenses")
+    }
+}
+
+jmh {
+    benchmarkMode = ["avgt"]
+    timeUnit = "ns"
+}
+
+license {
+    header = project.file("$rootDir/HEADER")
+    properties {
+        name = "Kaspian"
+        year = 2024
+    }
+
+    include "**/*.java"
+}

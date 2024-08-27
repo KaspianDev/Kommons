@@ -38,9 +38,19 @@ public class KonfigTest {
                 "booleanValue: true",
                 "doubleValue: 1.5",
                 "stringValue: \"string\"",
-                "testObject: ",
+                "testObject:",
                 "  testString: \"test\"",
-                "  testInt: 1"
+                "  testInt: 1",
+                "  testObject:",
+                "    testString: \"test2\"",
+                "    testInt: 2",
+                "testObject2:",
+                "  testObject:",
+                "    testString: \"test2\"",
+                "    testInt: 2",
+                "  testString: \"test3\"",
+                "  testInt: 3"
+
         ));
         file.deleteOnExit();
     }
@@ -83,6 +93,31 @@ public class KonfigTest {
         Konfig konfig = new Konfig(file);
         konfig.registerAdapter(new TestObjectAdapter());
         Assertions.assertEquals("test", konfig.get("testObject", TestObject.class).testString());
+    }
+
+    @Test
+    void testKonfigReadNestedObjectProperty() {
+        Konfig konfig = new Konfig(file);
+        konfig.registerAdapter(new TestObjectAdapter());
+        Assertions.assertEquals("test2", konfig.get("testObject.testObject", TestObject.class).testString());
+    }
+
+    @Test
+    void testKonfigReadNestedObject() {
+        Konfig konfig = new Konfig(file);
+        konfig.registerAdapter(new TestObjectAdapter());
+
+        TestObject expected = new TestObject("test2", 2);
+        Assertions.assertEquals(expected, konfig.get("testObject.testObject", TestObject.class));
+    }
+
+    @Test
+    void testKonfigReadObjectInObject() {
+        Konfig konfig = new Konfig(file);
+        konfig.registerAdapter(new TestObject2Adapter());
+
+        TestObject expected = new TestObject("test2", 2);
+        Assertions.assertEquals(expected, konfig.get("testObject2", TestObject2.class).testObject());
     }
 
 }

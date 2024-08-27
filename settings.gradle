@@ -1,4 +1,5 @@
 rootProject.name = projectName
 include "kolors"
 include "konfig"
+include 'placeholders'
 
