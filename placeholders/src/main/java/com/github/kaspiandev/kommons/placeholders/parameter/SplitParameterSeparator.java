@@ -19,6 +19,7 @@ package com.github.kaspiandev.kommons.placeholders.parameter;
 
 import com.github.kaspiandev.kommons.placeholders.Placeholder;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SplitParameterSeparator implements ParameterSeparator {
@@ -32,9 +33,9 @@ public class SplitParameterSeparator implements ParameterSeparator {
     }
 
     @Override
-    public List<Parameter<?>> separate() {
-        //return Arrays.stream(placeholder.getIdentifier().split(separator));
-        return null;
+    public List<String> separate() {
+        return Arrays.stream(placeholder.getIdentifier().split(separator))
+                     .toList();
     }
 
 }

@@ -19,8 +19,6 @@ package com.github.kaspiandev.kommons.placeholders.parameter;
 
 public interface Parameter<V> {
 
-    String getStringValue();
-
-    V parseValue();
+    V parseValue(String stringValue);
 
 }

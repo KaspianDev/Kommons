@@ -19,20 +19,9 @@ package com.github.kaspiandev.kommons.placeholders.parameter;
 
 public class StringParameter implements Parameter<String> {
 
-    private final String value;
-
-    public StringParameter(String value) {
-        this.value = value;
-    }
-
     @Override
-    public String getStringValue() {
-        return value;
-    }
-
-    @Override
-    public String parseValue() {
-        return value;
+    public String parseValue(String stringValue) {
+        return stringValue; // No parsing needed
     }
 
 }

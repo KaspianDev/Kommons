@@ -21,6 +21,6 @@ import java.util.List;
 
 public interface ParameterSeparator {
 
-    List<Parameter<?>> separate();
+    List<String> separate();
 
 }
