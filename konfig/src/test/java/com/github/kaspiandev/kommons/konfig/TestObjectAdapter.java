@@ -33,4 +33,9 @@ public class TestObjectAdapter implements KonfigAdapter<TestObject> {
         data.data().put("testInt", subject.testInt());
     }
 
+    @Override
+    public Class<TestObject> getSubjectClass() {
+        return TestObject.class;
+    }
+
 }

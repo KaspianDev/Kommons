@@ -37,7 +37,10 @@ public class KonfigTest {
                 "intValue: 1",
                 "booleanValue: true",
                 "doubleValue: 1.5",
-                "stringValue: \"string\""
+                "stringValue: \"string\"",
+                "testObject: ",
+                "  testString: \"test\"",
+                "  testInt: 1"
         ));
         file.deleteOnExit();
     }
@@ -73,6 +76,13 @@ public class KonfigTest {
     void testKonfigReadString() {
         Konfig konfig = new Konfig(file);
         Assertions.assertEquals("string", konfig.get("stringValue"));
+    }
+
+    @Test
+    void testKonfigReadObjectProperty() {
+        Konfig konfig = new Konfig(file);
+        konfig.registerAdapter(new TestObjectAdapter());
+        Assertions.assertEquals("test", konfig.get("testObject", TestObject.class).testString());
     }
 
 }

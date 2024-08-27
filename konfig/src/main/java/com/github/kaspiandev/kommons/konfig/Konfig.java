@@ -17,6 +17,8 @@
 
 package com.github.kaspiandev.kommons.konfig;
 
+import com.github.kaspiandev.kommons.konfig.adapter.KonfigAdapter;
+import com.github.kaspiandev.kommons.konfig.parser.KonfigSectionParser;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -24,6 +26,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -35,6 +38,7 @@ public class Konfig {
     private final Yaml yaml;
     private final File file;
     private final Map<String, Object> configProperties;
+    private final Map<Class<?>, KonfigAdapter<?>> adapters;
 
     public Konfig(File file) {
         this.file = file;
@@ -42,6 +46,7 @@ public class Konfig {
         defaultDumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         this.yaml = new Yaml(defaultDumperOptions);
         this.configProperties = loadFile();
+        this.adapters = new HashMap<>();
         this.separatorPattern = Pattern.compile(Pattern.quote("."));
     }
 
@@ -113,6 +118,19 @@ public class Konfig {
                 : getComplex(section);
     }
 
+    public <T> T get(String section, Class<T> clazz) {
+        if (adapters.containsKey(clazz)) {
+            KonfigSection konfigSection = getSection(section);
+            KonfigAdapter<T> adapter = (KonfigAdapter<T>) adapters.get(clazz);
+            return new KonfigSectionParser().decode(konfigSection, adapter);
+        } else {
+            Object object = (isSimple(section))
+                    ? getSimple(section)
+                    : getComplex(section);
+            return clazz.cast(object);
+        }
+    }
+
     private Object getComplex(String section) {
         Sektor sector = getSector(section);
         return sector.parentProperties().get(sector.lastLevel());
@@ -160,6 +178,10 @@ public class Konfig {
 
     public Map<String, Object> getConfigProperties() {
         return configProperties;
+    }
+
+    public void registerAdapter(KonfigAdapter<?> adapter) {
+        adapters.put(adapter.getSubjectClass(), adapter);
     }
 
 }

@@ -23,4 +23,6 @@ public interface KonfigAdapter<S> {
 
     void serialize(SerializationData data, S subject);
 
+    Class<S> getSubjectClass();
+
 }
