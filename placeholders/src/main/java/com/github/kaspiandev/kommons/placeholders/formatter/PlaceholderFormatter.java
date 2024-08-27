@@ -23,4 +23,6 @@ public interface PlaceholderFormatter {
 
     Pattern compile();
 
+    int getGroup();
+
 }

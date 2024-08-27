@@ -19,11 +19,11 @@ package com.github.kaspiandev.kommons.placeholders.parser;
 
 import com.github.kaspiandev.kommons.placeholders.Placeholder;
 import com.github.kaspiandev.kommons.placeholders.formatter.PlaceholderFormatter;
+import com.github.kaspiandev.kommons.placeholders.formatter.PlaceholderFormatterMatcher;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
 
 public class SimplePlaceholderParser implements PlaceholderParser<String> {
 
@@ -54,9 +54,9 @@ public class SimplePlaceholderParser implements PlaceholderParser<String> {
         StringBuilder result = new StringBuilder();
         int lastIndex = 0;
 
-        Matcher matcher = formatter.compile().matcher(input);
+        PlaceholderFormatterMatcher matcher = new PlaceholderFormatterMatcher(formatter, input);
         while (matcher.find()) {
-            Placeholder<?, ?> placeholder = placeholders.get(matcher.group(1));
+            Placeholder<?, ?> placeholder = placeholders.get(matcher.getCurrentGroup());
             if (placeholder == null) continue;
 
             result.append(input, lastIndex, matcher.start());

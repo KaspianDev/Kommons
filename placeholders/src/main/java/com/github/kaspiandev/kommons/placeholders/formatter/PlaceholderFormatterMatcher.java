@@ -17,34 +17,32 @@
 
 package com.github.kaspiandev.kommons.placeholders.formatter;
 
-import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
-public class SimplePlaceholderFormatter implements PlaceholderFormatter {
+public class PlaceholderFormatterMatcher {
 
-    private final String prefix;
-    private final String suffix;
+    private final PlaceholderFormatter formatter;
+    private final Matcher matcher;
 
-    public SimplePlaceholderFormatter(String prefix, String suffix) {
-        this.prefix = prefix;
-        this.suffix = suffix;
+    public PlaceholderFormatterMatcher(PlaceholderFormatter formatter, String input) {
+        this.formatter = formatter;
+        this.matcher = formatter.compile().matcher(input);
     }
 
-    public String getPrefix() {
-        return prefix;
+    public boolean find() {
+        return matcher.find();
     }
 
-    public String getSuffix() {
-        return suffix;
+    public String getCurrentGroup() {
+        return matcher.group(formatter.getGroup());
     }
 
-    @Override
-    public Pattern compile() {
-        return Pattern.compile(Pattern.quote(getPrefix()) + "([^{}]+)" + Pattern.quote(getSuffix()));
+    public int start() {
+        return matcher.start();
     }
 
-    @Override
-    public int getGroup() {
-        return 1;
+    public int end() {
+        return matcher.end();
     }
 
 }

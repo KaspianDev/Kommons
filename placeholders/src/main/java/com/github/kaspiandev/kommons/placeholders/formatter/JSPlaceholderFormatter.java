@@ -17,16 +17,10 @@
 
 package com.github.kaspiandev.kommons.placeholders.formatter;
 
-public class JSPlaceholderFormatter implements SimplePlaceholderFormatter {
+public class JSPlaceholderFormatter extends SimplePlaceholderFormatter {
 
-    @Override
-    public String getPrefix() {
-        return "${";
-    }
-
-    @Override
-    public String getSuffix() {
-        return "}";
+    public JSPlaceholderFormatter() {
+        super("${", "}");
     }
 
 }
