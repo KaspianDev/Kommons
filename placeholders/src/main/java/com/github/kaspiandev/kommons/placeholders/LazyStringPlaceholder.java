@@ -15,18 +15,20 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.kaspiandev.kommons.placeholders.formatter;
+package com.github.kaspiandev.kommons.placeholders;
 
-public class JSPlaceholderFormatter implements SimplePlaceholderFormatter {
+import java.util.function.Function;
+
+public class LazyStringPlaceholder implements LazyPlaceholder<Object, String>, StringPlaceholder<Function<Object, String>> {
 
     @Override
-    public String getPrefix() {
-        return "${";
+    public String evaluate(Function<Object, String> input) {
+        return "";
     }
 
     @Override
-    public String getSuffix() {
-        return "}";
+    public String getIdentifier() {
+        return "";
     }
 
 }

@@ -15,18 +15,21 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.kaspiandev.kommons.placeholders.formatter;
+package com.github.kaspiandev.kommons.placeholders.parser;
 
-public class JSPlaceholderFormatter implements SimplePlaceholderFormatter {
+import com.github.kaspiandev.kommons.placeholders.Placeholder;
+import com.github.kaspiandev.kommons.placeholders.formatter.PlaceholderFormatter;
 
-    @Override
-    public String getPrefix() {
-        return "${";
-    }
+import java.util.Collection;
 
-    @Override
-    public String getSuffix() {
-        return "}";
-    }
+public interface PlaceholderParser {
+
+    String getInput();
+
+    Collection<Placeholder<?, ?>> getPlaceholders();
+
+    PlaceholderFormatter getFormatter();
+
+    String parse();
 
 }

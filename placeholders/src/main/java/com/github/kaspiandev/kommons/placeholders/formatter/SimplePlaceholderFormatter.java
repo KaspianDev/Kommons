@@ -17,16 +17,17 @@
 
 package com.github.kaspiandev.kommons.placeholders.formatter;
 
-public class JSPlaceholderFormatter implements SimplePlaceholderFormatter {
+import java.util.regex.Pattern;
+
+public interface SimplePlaceholderFormatter extends PlaceholderFormatter {
+
+    String getPrefix();
+
+    String getSuffix();
 
     @Override
-    public String getPrefix() {
-        return "${";
-    }
-
-    @Override
-    public String getSuffix() {
-        return "}";
+    default Pattern compile() {
+        return Pattern.compile(Pattern.quote(getPrefix()) + "([^{}]+)" + Pattern.quote(getSuffix()));
     }
 
 }

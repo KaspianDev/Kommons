@@ -15,18 +15,9 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.kaspiandev.kommons.placeholders.formatter;
+package com.github.kaspiandev.kommons.placeholders;
 
-public class JSPlaceholderFormatter implements SimplePlaceholderFormatter {
+import java.util.function.Function;
 
-    @Override
-    public String getPrefix() {
-        return "${";
-    }
-
-    @Override
-    public String getSuffix() {
-        return "}";
-    }
-
+public interface LazyPlaceholder<I, O> extends Placeholder<Function<I, O>, O> {
 }

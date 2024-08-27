@@ -17,10 +17,10 @@
 
 package com.github.kaspiandev.kommons.placeholders.formatter;
 
+import java.util.regex.Pattern;
+
 public interface PlaceholderFormatter {
 
-    String getPrefix();
-
-    String getSuffix();
+    Pattern compile();
 
 }

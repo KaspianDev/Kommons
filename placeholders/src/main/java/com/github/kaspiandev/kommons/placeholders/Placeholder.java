@@ -17,10 +17,10 @@
 
 package com.github.kaspiandev.kommons.placeholders;
 
-public interface Placeholder<T> {
+public interface Placeholder<I, O> {
 
     String getIdentifier();
 
-    T apply(String input);
+    O evaluate(I input);
 
 }
