@@ -15,26 +15,10 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.kaspiandev.kommons.placeholders;
+package com.github.kaspiandev.kommons.placeholders.parameter;
 
-import java.util.function.Supplier;
+public interface Parameter<V> {
 
-public class LazyStringPlaceholder implements LazyPlaceholder<String>, StringPlaceholder<Supplier<String>> {
-
-    private final String identifier;
-
-    public LazyStringPlaceholder(String identifier) {
-        this.identifier = identifier;
-    }
-
-    @Override
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    @Override
-    public String evaluate(Supplier<String> input) {
-        return input.get();
-    }
+    V getValue();
 
 }

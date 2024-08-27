@@ -17,7 +17,7 @@
 
 package com.github.kaspiandev.kommons.placeholders;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
-public interface LazyPlaceholder<I, O> extends Placeholder<Function<I, O>, O> {
+public interface LazyPlaceholder<O> extends Placeholder<Supplier<O>, O> {
 }

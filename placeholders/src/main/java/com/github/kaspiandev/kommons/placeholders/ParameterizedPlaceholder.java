@@ -17,24 +17,12 @@
 
 package com.github.kaspiandev.kommons.placeholders;
 
-import java.util.function.Supplier;
+import com.github.kaspiandev.kommons.placeholders.parameter.Parameter;
 
-public class LazyStringPlaceholder implements LazyPlaceholder<String>, StringPlaceholder<Supplier<String>> {
+import java.util.Collection;
 
-    private final String identifier;
+public interface ParameterizedPlaceholder<I, O> extends Placeholder<I, O> {
 
-    public LazyStringPlaceholder(String identifier) {
-        this.identifier = identifier;
-    }
-
-    @Override
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    @Override
-    public String evaluate(Supplier<String> input) {
-        return input.get();
-    }
+    Collection<Parameter<?>> getParameters();
 
 }

@@ -17,14 +17,14 @@
 
 package com.github.kaspiandev.kommons.placeholders;
 
-import java.util.function.Supplier;
-
-public class LazyStringPlaceholder implements LazyPlaceholder<String>, StringPlaceholder<Supplier<String>> {
+public class FixedStringPlaceholder implements StringPlaceholder<String> {
 
     private final String identifier;
+    private final String value;
 
-    public LazyStringPlaceholder(String identifier) {
+    public FixedStringPlaceholder(String identifier, String value) {
         this.identifier = identifier;
+        this.value = value;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class LazyStringPlaceholder implements LazyPlaceholder<String>, StringPla
     }
 
     @Override
-    public String evaluate(Supplier<String> input) {
-        return input.get();
+    public String evaluate(String input) {
+        return value;
     }
 
 }
