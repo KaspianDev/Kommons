@@ -17,9 +17,9 @@
 
 package com.github.kaspiandev.kommons.placeholders.parameter;
 
-import com.github.kaspiandev.kommons.placeholders.ParameterizedPlaceholder;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class ParameterParser {
 
@@ -33,18 +33,15 @@ public class ParameterParser {
         parameters.add(parameter);
     }
 
-    public Map<?, Parameter<?>> parse(ParameterizedPlaceholder<?, ?> placeholder) {
-        Map<?, Parameter<?>> parsedParameters = new HashMap<>();
-        for (String value : placeholder.getParameters()) {
-            Map.Entry<?, Parameter<?>> entry;
-            for (Parameter<?> parameter : parameters) {
-                Optional<?> parsedValue = parameter.parseValue(value);
-                if (parsedValue.isEmpty()) continue;
+    public <T> Optional<T> parseAs(ParameterStringValue stringValue, Class<T> clazz) {
+        for (Parameter<?> parameter : parameters) {
+            Optional<?> value = parameter.parseValue(stringValue);
+            if (value.isEmpty()) continue;
+            if (!clazz.isInstance(value.get())) continue;
 
-                //parsedParameters.put(e);
-            }
+            return Optional.of(clazz.cast(value.get()));
         }
-        return parsedParameters;
+        return Optional.empty();
     }
 
 }

@@ -27,8 +27,8 @@ public class StringParameter implements Parameter<String> {
     }
 
     @Override
-    public Optional<String> parseValue(String stringValue) {
-        return Optional.of(stringValue); // No parsing needed
+    public Optional<String> parseValue(ParameterStringValue stringValue) {
+        return Optional.of(stringValue.value()); // No parsing needed
     }
 
 }

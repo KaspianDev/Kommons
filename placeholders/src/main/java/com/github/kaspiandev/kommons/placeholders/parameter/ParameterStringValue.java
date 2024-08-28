@@ -17,23 +17,5 @@
 
 package com.github.kaspiandev.kommons.placeholders.parameter;
 
-import com.github.kaspiandev.kommons.placeholders.ParameterizedPlaceholder;
-
-import java.util.Arrays;
-import java.util.List;
-
-public class SplitParameterSeparator implements ParameterSeparator {
-
-    private final String separator;
-
-    public SplitParameterSeparator(String separator) {
-        this.separator = separator;
-    }
-
-    @Override
-    public List<String> separate(ParameterizedPlaceholder<?, ?> placeholder) {
-        return Arrays.stream(placeholder.getIdentifier().split(separator))
-                     .toList();
-    }
-
+public record ParameterStringValue(String value) {
 }

@@ -17,16 +17,19 @@
 
 package com.github.kaspiandev.kommons.placeholders;
 
-import com.github.kaspiandev.kommons.placeholders.parameter.ParameterSeparator;
+import com.github.kaspiandev.kommons.placeholders.parameter.ParameterStringValue;
 
+import java.util.Arrays;
 import java.util.List;
 
 public interface ParameterizedPlaceholder<I, O> extends Placeholder<I, O> {
 
-    ParameterSeparator getSeparator();
-
-    default List<String> getParameters() {
-        return getSeparator().separate(this);
+    // TODO: add splitters again
+    default List<ParameterStringValue> getParameters() {
+        String[] allParams = getIdentifier().split(":");
+        return Arrays.stream(Arrays.copyOfRange(allParams, 1, allParams.length))
+                     .map(ParameterStringValue::new)
+                     .toList();
     }
 
 }

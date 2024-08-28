@@ -17,8 +17,14 @@
 
 package com.github.kaspiandev.kommons.placeholders;
 
+import com.github.kaspiandev.kommons.placeholders.parameter.IntegerParameter;
+import com.github.kaspiandev.kommons.placeholders.parameter.ParameterParser;
+import com.github.kaspiandev.kommons.placeholders.parameter.ParameterStringValue;
+import com.github.kaspiandev.kommons.placeholders.parameter.StringParameter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class PlaceholderTest {
 
@@ -34,6 +40,92 @@ public class PlaceholderTest {
         LazyStringPlaceholder placeholder = new LazyStringPlaceholder("test", () -> "testValue");
 
         Assertions.assertEquals("testValue", placeholder.evaluate());
+    }
+
+    @Test
+    void testStringParameterizedPlaceholder() {
+        StringParameterizedPlaceholder placeholder = new StringParameterizedPlaceholder() {
+
+            @Override
+            public String getIdentifier() {
+                return "test:param1:param2";
+            }
+
+            @Override
+            public String getValue() {
+                ParameterParser parser = new ParameterParser();
+                parser.registerParameter(new StringParameter());
+
+                List<ParameterStringValue> parameters = getParameters();
+                String param1 = parser.parseAs(parameters.get(0), String.class).orElseThrow();
+                String param2 = parser.parseAs(parameters.get(1), String.class).orElseThrow();
+
+                return param1 + " " + param2;
+            }
+
+            @Override
+            public String evaluate() {
+                return getValue();
+            }
+
+        };
+
+        Assertions.assertEquals("param1 param2", placeholder.evaluate());
+    }
+
+    @Test
+    void testIntParameterizedPlaceholder() {
+        ParameterizedPlaceholder<Integer, Integer> placeholder = new ParameterizedPlaceholder<>() {
+
+            @Override
+            public String getIdentifier() {
+                return "test:1:2";
+            }
+
+            @Override
+            public Integer getValue() {
+                ParameterParser parser = new ParameterParser();
+                parser.registerParameter(new IntegerParameter());
+
+                List<ParameterStringValue> parameters = getParameters();
+                int param1 = parser.parseAs(parameters.get(0), Integer.class).orElseThrow();
+                int param2 = parser.parseAs(parameters.get(1), Integer.class).orElseThrow();
+
+                return param1 + param2;
+            }
+
+            @Override
+            public Integer evaluate() {
+                return getValue();
+            }
+
+        };
+
+        Assertions.assertEquals(3, placeholder.evaluate());
+    }
+
+    @Test
+    void testParameterizedPlaceholderIdentifier() {
+        StringParameterizedPlaceholder placeholder = new StringParameterizedPlaceholder() {
+
+            @Override
+            public String getIdentifier() {
+                return "test:param1:param2";
+            }
+
+            @Override
+            public String getValue() {
+                return "";
+            }
+
+            @Override
+            public String evaluate() {
+                return "";
+            }
+
+        };
+
+        Assertions.assertEquals("test:param1:param2", placeholder.getIdentifier());
     }
 
 }

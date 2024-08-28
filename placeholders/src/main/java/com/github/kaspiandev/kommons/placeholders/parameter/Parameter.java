@@ -23,6 +23,6 @@ public interface Parameter<V> {
 
     Class<V> getValueClass();
 
-    Optional<V> parseValue(String stringValue);
+    Optional<V> parseValue(ParameterStringValue stringValue);
 
 }

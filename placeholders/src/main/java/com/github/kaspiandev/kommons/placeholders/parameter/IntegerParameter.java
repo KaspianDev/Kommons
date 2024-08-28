@@ -27,9 +27,9 @@ public class IntegerParameter implements Parameter<Integer> {
     }
 
     @Override
-    public Optional<Integer> parseValue(String stringValue) {
+    public Optional<Integer> parseValue(ParameterStringValue stringValue) {
         try {
-            return Optional.of(Integer.parseInt(stringValue));
+            return Optional.of(Integer.parseInt(stringValue.value()));
         } catch (NumberFormatException ex) {
             return Optional.empty();
         }
