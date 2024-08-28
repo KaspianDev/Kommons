@@ -19,10 +19,20 @@ package com.github.kaspiandev.kommons.placeholders.parameter;
 
 import java.util.Optional;
 
-public interface Parameter<V> {
+public class IntegerParameter implements Parameter<Integer> {
 
-    Class<V> getValueClass();
+    @Override
+    public Class<Integer> getValueClass() {
+        return Integer.class;
+    }
 
-    Optional<V> parseValue(String stringValue);
+    @Override
+    public Optional<Integer> parseValue(String stringValue) {
+        try {
+            return Optional.of(Integer.parseInt(stringValue));
+        } catch (NumberFormatException ex) {
+            return Optional.empty();
+        }
+    }
 
 }

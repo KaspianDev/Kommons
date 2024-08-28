@@ -17,10 +17,12 @@
 
 package com.github.kaspiandev.kommons.placeholders.parameter;
 
+import com.github.kaspiandev.kommons.placeholders.ParameterizedPlaceholder;
+
 import java.util.List;
 
 public interface ParameterSeparator {
 
-    List<String> separate();
+    List<String> separate(ParameterizedPlaceholder<?, ?> placeholder);
 
 }

@@ -19,21 +19,32 @@ package com.github.kaspiandev.kommons.placeholders.parameter;
 
 import com.github.kaspiandev.kommons.placeholders.ParameterizedPlaceholder;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-public class SplitParameterSeparator implements ParameterSeparator {
+public class ParameterParser {
 
-    private final String separator;
+    private final List<Parameter<?>> parameters;
 
-    public SplitParameterSeparator(String separator) {
-        this.separator = separator;
+    public ParameterParser() {
+        this.parameters = new ArrayList<>();
     }
 
-    @Override
-    public List<String> separate(ParameterizedPlaceholder<?, ?> placeholder) {
-        return Arrays.stream(placeholder.getIdentifier().split(separator))
-                     .toList();
+    public void registerParameter(Parameter<?> parameter) {
+        parameters.add(parameter);
+    }
+
+    public Map<?, Parameter<?>> parse(ParameterizedPlaceholder<?, ?> placeholder) {
+        Map<?, Parameter<?>> parsedParameters = new HashMap<>();
+        for (String value : placeholder.getParameters()) {
+            Map.Entry<?, Parameter<?>> entry;
+            for (Parameter<?> parameter : parameters) {
+                Optional<?> parsedValue = parameter.parseValue(value);
+                if (parsedValue.isEmpty()) continue;
+
+                //parsedParameters.put(e);
+            }
+        }
+        return parsedParameters;
     }
 
 }

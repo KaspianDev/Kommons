@@ -17,11 +17,18 @@
 
 package com.github.kaspiandev.kommons.placeholders.parameter;
 
+import java.util.Optional;
+
 public class StringParameter implements Parameter<String> {
 
     @Override
-    public String parseValue(String stringValue) {
-        return stringValue; // No parsing needed
+    public Class<String> getValueClass() {
+        return String.class;
+    }
+
+    @Override
+    public Optional<String> parseValue(String stringValue) {
+        return Optional.of(stringValue); // No parsing needed
     }
 
 }

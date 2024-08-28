@@ -15,14 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.kaspiandev.kommons.placeholders.parameter;
+package com.github.kaspiandev.kommons.placeholders;
 
-import java.util.Optional;
-
-public interface Parameter<V> {
-
-    Class<V> getValueClass();
-
-    Optional<V> parseValue(String stringValue);
-
+public interface StringParameterizedPlaceholder extends ParameterizedPlaceholder<String, String>, StringPlaceholder<String> {
 }
