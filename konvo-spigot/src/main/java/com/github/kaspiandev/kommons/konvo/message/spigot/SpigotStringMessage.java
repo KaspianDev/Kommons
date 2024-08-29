@@ -17,27 +17,18 @@
 
 package com.github.kaspiandev.kommons.konvo.message.spigot;
 
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TextComponent;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import com.github.kaspiandev.kommons.konvo.message.StringMessage;
+import org.bukkit.ChatColor;
 
-public class SpigotMessageTest {
+public class SpigotStringMessage extends StringMessage {
 
-    @Test
-    void testComponentMessage() {
-        BaseComponent[] component = TextComponent.fromLegacyText("Hello, World!");
-        SpigotComponentMessage message = new SpigotComponentMessage(component);
-
-        Assertions.assertEquals("§fHello, World!", BaseComponent.toLegacyText(message.getContents()));
+    public SpigotStringMessage(String contents) {
+        super(contents);
     }
 
-    @Test
-    void testSpigotStringMessage() {
-        String contents = "&6Hello, World!";
-        SpigotStringMessage message = new SpigotStringMessage(contents);
-
-        Assertions.assertEquals("§6Hello, World!", message.getContents());
+    @Override
+    public String getContents() {
+        return ChatColor.translateAlternateColorCodes('&', super.getContents());
     }
 
 }

@@ -38,8 +38,16 @@ public class CommandSenderKonverser {
         return componentKonverser;
     }
 
+    public void messageComponent(Message<BaseComponent[]> message) {
+        getAsComponent().message(message);
+    }
+
     public CommandSenderStringKonverser getAsString() {
         return stringKonverser;
+    }
+
+    public void messageString(Message<String> message) {
+        getAsString().message(message);
     }
 
     public class CommandSenderComponentKonverser implements ComponentKonverser<CommandSender> {

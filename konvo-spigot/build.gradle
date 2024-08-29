@@ -3,6 +3,7 @@ plugins {
     id "net.minecraftforge.licenser" version "1.0.1"
     id "me.champeau.jmh" version "0.7.2"
     id "java-library"
+    id "maven-publish"
 }
 
 group = property("group") + ".konvo"
@@ -41,6 +42,18 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = this.group
+            artifactId = 'konvo-spigot'
+            version = this.version
+
+            from components.java
+        }
+    }
 }
 
 tasks {

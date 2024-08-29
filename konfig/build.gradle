@@ -2,6 +2,7 @@ plugins {
     id "java"
     id "com.gradleup.shadow" version "8.3.0"
     id "net.minecraftforge.licenser" version "1.0.1"
+    id "maven-publish"
 }
 
 group = property("group") + ".konfig"
@@ -29,6 +30,14 @@ shadowJar {
     setArchiveClassifier(null)
 
     relocate "org.yaml.snakeyaml", this.group + ".snakeyaml"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) { publication ->
+            project.shadow.component(publication)
+        }
+    }
 }
 
 tasks {

@@ -20,11 +20,11 @@ package com.github.kaspiandev.kommons.konvo.message.spigot;
 import com.github.kaspiandev.kommons.konvo.message.Message;
 import net.md_5.bungee.api.chat.BaseComponent;
 
-public class ComponentMessage implements Message<BaseComponent[]> {
+public class SpigotComponentMessage implements Message<BaseComponent[]> {
 
     private final BaseComponent[] contents;
 
-    public ComponentMessage(BaseComponent... contents) {
+    public SpigotComponentMessage(BaseComponent... contents) {
         this.contents = contents;
     }
 
