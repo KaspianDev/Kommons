@@ -21,7 +21,7 @@ import com.github.kaspiandev.kommons.konvo.message.Message;
 
 import java.io.PrintStream;
 
-public class OutKonverser implements StringKonverser<PrintStream> {
+public class SoutKonverser implements StringKonverser<PrintStream> {
 
     @Override
     public PrintStream getEntity() {

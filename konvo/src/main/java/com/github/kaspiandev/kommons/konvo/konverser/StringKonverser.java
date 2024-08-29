@@ -17,10 +17,6 @@
 
 package com.github.kaspiandev.kommons.konvo.konverser;
 
-import com.github.kaspiandev.kommons.konvo.message.Message;
-
-public interface StringKonverser<E> extends Konverser<E> {
-
-    void message(Message<String> message);
+public interface StringKonverser<E> extends Konverser<E, String> {
 
 }

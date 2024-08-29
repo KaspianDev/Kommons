@@ -19,10 +19,22 @@ package com.github.kaspiandev.kommons.konvo.konverser;
 
 import com.github.kaspiandev.kommons.konvo.message.Message;
 
-public interface Konverser<E, M> {
+public class StringBuilderKonverser implements StringKonverser<StringBuilder> {
 
-    E getEntity();
+    private final StringBuilder builder;
 
-    void message(Message<M> message);
+    public StringBuilderKonverser(StringBuilder builder) {
+        this.builder = builder;
+    }
+
+    @Override
+    public StringBuilder getEntity() {
+        return builder;
+    }
+
+    @Override
+    public void message(Message<String> message) {
+        getEntity().append(message.getContents());
+    }
 
 }

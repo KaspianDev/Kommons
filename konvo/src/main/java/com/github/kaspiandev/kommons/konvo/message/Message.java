@@ -17,8 +17,14 @@
 
 package com.github.kaspiandev.kommons.konvo.message;
 
+import com.github.kaspiandev.kommons.konvo.konverser.Konverser;
+
 public interface Message<M> {
 
     M getContents();
+
+    default void send(Konverser<?, M> konverser) {
+        konverser.message(this);
+    }
 
 }

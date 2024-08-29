@@ -17,12 +17,21 @@
 
 package com.github.kaspiandev.kommons.konvo.konverser;
 
-import com.github.kaspiandev.kommons.konvo.message.Message;
+import com.github.kaspiandev.kommons.konvo.message.StringMessage;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public interface Konverser<E, M> {
+public class KonverserTest {
 
-    E getEntity();
+    @Test
+    void testStringKonverser() {
+        StringBuilder builder = new StringBuilder();
+        StringBuilderKonverser konverser = new StringBuilderKonverser(builder);
 
-    void message(Message<M> message);
+        StringMessage message = new StringMessage("Hello, World!");
+        konverser.message(message);
+
+        Assertions.assertEquals("Hello, World!", builder.toString());
+    }
 
 }
