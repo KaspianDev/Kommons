@@ -1,5 +1,7 @@
 # Kommons
 
+![](assets/kommons-gradient-showcase.png)
+
 Kommons is a library for java that currently has these modules:
 
 - konfig - for easier yml config management
